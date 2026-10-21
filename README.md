@@ -2,6 +2,19 @@
 
 A project exploring lymph-node metastasis detection in whole-slide pathology images.
 
+## Setup
+
+Install [uv](https://docs.astral.sh/uv/getting-started/installation/), then run these commands from the repository root:
+
+```bash
+uv sync --locked
+uv run --locked jupyter lab
+```
+
+The project uses Python 3.13, with the interpreter version in `.python-version` and dependency versions in `uv.lock`. The environment includes NumPy, pandas, Matplotlib, boto3, and Jupyter for the data audit. `uv sync` creates `.venv/` locally; keep that directory outside Git and recreate it on each machine.
+
+Project decisions and findings go in [LOG.md](LOG.md).
+
 ## Research question
 
 **How accurately and efficiently can we identify slides containing lymph-node metastases—and what happens when the slides come from different sites?**
@@ -31,8 +44,14 @@ A project exploring lymph-node metastasis detection in whole-slide pathology ima
 
 ```text
 gigapixel-lab/
-├── data/        # Local datasets (excluded from Git)
-├── notebooks/   # Exploration and learning
-├── src/         # Project code as we build it
-└── README.md    # Project overview
+├── .python-version # Pinned Python interpreter version
+├── LOG.md          # Research questions, decisions, and findings
+├── data/           # Local datasets (excluded from Git)
+├── docs/           # Analysis plan and report
+├── notebooks/      # Exploration and learning
+├── splits/         # Dataset split definitions
+├── src/            # Project code as we build it
+├── pyproject.toml  # Python version range and dependencies
+├── uv.lock         # Resolved dependency versions
+└── README.md       # Project overview
 ```

@@ -1,0 +1,18 @@
+[project]
+name = "gigapixel-lab"
+version = "0.1.0"
+description = "Lymph-node metastasis classification in whole-slide pathology images."
+readme = "README.md"
+requires-python = ">=3.13,<3.14"
+dependencies = [
+    "boto3",
+    "matplotlib",
+    "numpy",
+    "pandas",
+]
+
+[dependency-groups]
+dev = [
+    "ipykernel",
+    "jupyterlab",
+]
