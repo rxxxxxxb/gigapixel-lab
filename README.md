@@ -15,6 +15,8 @@ The project uses Python 3.13, with the interpreter version in `.python-version` 
 
 Project decisions and findings go in [LOG.md](LOG.md).
 
+Start with [the data-audit notebook](notebooks/01_data_audit.ipynb) and run its cells from top to bottom. It downloads the small CAMELYON17 metadata files and a file listing, then reuses the saved snapshot on later runs. The audit counts labels by hospital and estimates image storage. Read the [audit notes](docs/data_audit.md) for the findings and limitations.
+
 ## Research question
 
 **How accurately and efficiently can we identify slides containing lymph-node metastases—and what happens when the slides come from different sites?**
