@@ -8,7 +8,10 @@ dependencies = [
     "boto3",
     "matplotlib",
     "numpy",
+    "openslide-bin>=4.0.1.2",
+    "openslide-python>=1.4.7",
     "pandas",
+    "pillow>=13.0.0",
 ]
 
 [dependency-groups]
@@ -16,3 +19,6 @@ dev = [
     "ipykernel",
     "jupyterlab",
 ]
+
+[tool.uv]
+python-preference = "only-managed"
