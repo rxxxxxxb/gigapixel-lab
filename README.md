@@ -11,11 +11,16 @@ uv sync --locked
 uv run --locked jupyter lab
 ```
 
-The project uses Python 3.13, with the interpreter version in `.python-version` and dependency versions in `uv.lock`. The environment includes NumPy, pandas, Matplotlib, boto3, and Jupyter for the data audit. `uv sync` creates `.venv/` locally; keep that directory outside Git and recreate it on each machine.
+The project uses Python 3.13.18, pinned in `.python-version`. The supported Python range and dependencies are in `pyproject.toml`; `uv.lock` records the resolved package versions. 
+
+`uv sync --locked` downloads the pinned Python version if needed and creates `.venv/` with the locked dependencies, including Jupyter. Keep `.venv/` outside Git and recreate it on each machine. 
+
 
 Project decisions and findings go in [LOG.md](LOG.md).
 
 Start with [the data-audit notebook](notebooks/01_data_audit.ipynb) and run its cells from top to bottom. It downloads the small CAMELYON17 metadata files and a file listing, then reuses the saved snapshot on later runs. The audit counts labels by hospital and estimates image storage. Read the [audit notes](docs/data_audit.md) for the findings and limitations.
+
+Next, [open one annotated slide](notebooks/02_look_at_slides.ipynb). This notebook downloads one TIFF image (about 875 MB) and its XML annotation, verifies their checksums, and uses OpenSlide to show the resolution levels and a thumbnail with tumor outlines. Later runs reuse the verified files. OpenSlide's Python package and native library are included in the uv dependencies; this inspection runs on the CPU.
 
 ## Research question
 

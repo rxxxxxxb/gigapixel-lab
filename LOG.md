@@ -14,6 +14,8 @@ What I found: The packages import correctly on the Mac, and basic table operatio
 
 Decision: Use `uv` with Python 3.13 and a local `.venv`. Let's Keep the dependency versions in Git so I can recreate the setup on another machine.
 
+---
+
 ## 2026-10-22 · Step 1: Check the dataset
 
 Question: What labels are available in the CAMELYON17 AWS copy, how are they spread across hospitals, and how much space would the slides need?
@@ -28,6 +30,8 @@ Decision: Keep the four slide labels separate for now and use the published hosp
 
 Next: Open a small sample of images, check their dimensions and physical pixel sizes, and overlay a tumor annotation on one slide.
 
+---
+
 ## 2026-11-02 · Review the metadata audit
 
 Question: Why does the CSV have 600 rows for 500 labeled images, and what does "artificial patient" mean?
@@ -36,3 +40,24 @@ What I learned: There are 500 labels for individual slides and 100 staging label
 
 What I changed: Edited the notebook explanations and updated the audit notes. I'll use "slide group" in the explanations and define the official term once. 
 
+---
+
+## 2026-11-03 · Step 2: Open one annotated slide
+
+Question: Since I do not have enough space  on my Mac for all the WSI, lets check if I can open a whole-slide image, read its resolution information, and draw the supplied tumor outline in the right place?
+
+Expectation: The file should contain several resolution levels. I'll check whether it records the physical pixel size instead of assuming that the metadata is complete.
+
+Selection: Start with `patient_092_node_1.tif` from hospital 4. At about 875 MB, it is the smallest slide in the saved inventory with a macrometastasis label and an XML annotation. I chose it to check the reading and plotting code. It is not a representative sample of the dataset.
+
+What I did: Used OpenSlide, downloaded the TIFF and XML, and build a notebook for reading the slide metadata and displaying the annotation. Both files match their published MD5 checksums. All notebook code cells ran successfully on the Mac using the saved files. The agent checked the rendered thumbnail and overlay.
+
+What I found: The image is 184,320 by 93,696 pixels, about 17.27 gigapixels. It has ten resolution levels and records 0.25 micrometers per pixel in both directions. The objective magnification field is missing. The XML contains four tumor polygons, all their coordinates fall within the image. The main outline is visible on the thumbnail, while the smaller outlines are difficult to see at that scale.
+
+Environment:  Added the OpenSlide packages and Pillow to the project dependencies and updated the lockfile. Updated uv from 0.12.1 to 0.13.7 so it could download Python 3.13.18, rebuilt `.venv`, and set `python-preference = "only-managed"` in `pyproject.toml`. The README now explains this setup.  The agent confirmed that all 106 installed package versions match the previous environment and that `uv.lock` is unchanged. All six code cells in the slide-inspection notebook ran successfully with the new environment. The executed copy is saved under `data/derived/environment_check/`.
+
+Decision: Record the physical pixel size from the file and leave missing magnification metadata unset. Keep the downloaded image and generated inspection files  `data/`.
+
+Next: Work through this example, then inspect two slides per hospital to compare their resolution metadata and thumbnails.
+
+---
