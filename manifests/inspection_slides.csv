@@ -1,0 +1,11 @@
+slide_id,hospital,label,image_key,image_bytes,image_md5,annotation_key,annotation_bytes,annotation_md5
+patient_019_node_4.tif,0,negative,CAMELYON17/images/patient_019_node_4.tif,1257934803,002faf4439400e47afec3de1ed23c3e0,,0,
+patient_012_node_0.tif,0,macro,CAMELYON17/images/patient_012_node_0.tif,1973649287,1c7e6328fac12e8b1273fee2dc59389f,CAMELYON17/annotations/patient_012_node_0.xml,26909,e4c560ddd2f396dc25a50ffb0068f1cf
+patient_031_node_4.tif,1,negative,CAMELYON17/images/patient_031_node_4.tif,1789654841,17faaa86cf8904e2b94325fc1bd75b5d,,0,
+patient_034_node_3.tif,1,macro,CAMELYON17/images/patient_034_node_3.tif,3947313849,f8248474673e9833812076a6db6801ef,CAMELYON17/annotations/patient_034_node_3.xml,158652,6d642794e6a10b5e2c3d1b960b8133b5
+patient_053_node_4.tif,2,negative,CAMELYON17/images/patient_053_node_4.tif,609802189,595446e7eb551269b9f72e78eeb38bc2,,0,
+patient_044_node_4.tif,2,macro,CAMELYON17/images/patient_044_node_4.tif,1323313159,6c1537a8bd4a9e78852a32d26bae17c9,CAMELYON17/annotations/patient_044_node_4.xml,44197,04e567e75bd7cd6255009908195aa1b7
+patient_065_node_2.tif,3,negative,CAMELYON17/images/patient_065_node_2.tif,1452342101,4e9b51bf71e6943b796999595512e5ce,,0,
+patient_075_node_4.tif,3,macro,CAMELYON17/images/patient_075_node_4.tif,3228288617,598dae22e180505bfba22f20c0a13a9c,CAMELYON17/annotations/patient_075_node_4.xml,92058,22fc002bb2c354e7c0e3bfe741f1a116
+patient_083_node_4.tif,4,negative,CAMELYON17/images/patient_083_node_4.tif,305658738,abd7b454473b82d963ec318ffe19951b,,0,
+patient_092_node_1.tif,4,macro,CAMELYON17/images/patient_092_node_1.tif,875466460,6f1b46a69fde3782594df0937aecfd88,CAMELYON17/annotations/patient_092_node_1.xml,31964,7873d05592e22849d9277b8ca49cb6a0

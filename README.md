@@ -20,7 +20,9 @@ Project decisions and findings go in [LOG.md](LOG.md).
 
 Start with [the data-audit notebook](notebooks/01_data_audit.ipynb) and run its cells from top to bottom. It downloads the small CAMELYON17 metadata files and a file listing, then reuses the saved snapshot on later runs. The audit counts labels by hospital and estimates image storage. Read the [audit notes](docs/data_audit.md) for the findings and limitations.
 
-Next, [open one annotated slide](notebooks/02_look_at_slides.ipynb). This notebook downloads one TIFF image (about 875 MB) and its XML annotation, verifies their checksums, and uses OpenSlide to show the resolution levels and a thumbnail with tumor outlines. Later runs reuse the verified files. OpenSlide's Python package and native library are included in the uv dependencies; this inspection runs on the CPU.
+Next, [open one annotated slide](notebooks/02_look_at_slides.ipynb). This notebook downloads one TIFF image (about 875 MB) and its XML annotation, verifies their checksums, and uses OpenSlide to show the resolution levels and a thumbnail with tumor outlines. Later runs reuse the verified files. OpenSlide's Python package and native library are included in the uv dependencies; this runs on the CPU.
+
+Then [compare two slides per hospital](notebooks/02b_compare_hospitals.ipynb). The [fixed inspection sample](manifests/inspection_slides.csv) contains one negative slide and one annotated macro slide from each hospital, with source locations and checksums. The ten TIFFs need about 16.76 GB in total, including the first example. The notebook explains the selection, compares pixel sizes and resolution levels, and shows all five hospitals in one thumbnail grid.
 
 ## Research question
 
@@ -55,6 +57,7 @@ gigapixel-lab/
 ├── LOG.md          # Research questions, decisions, and findings
 ├── data/           # Local datasets (excluded from Git)
 ├── docs/           # Analysis plan and report
+├── manifests/      # Fixed sample selections and source checksums
 ├── notebooks/      # Exploration and learning
 ├── splits/         # Dataset split definitions
 ├── src/            # Project code as we build it
