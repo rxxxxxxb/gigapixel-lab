@@ -61,3 +61,41 @@ Decision: Record the physical pixel size from the file and leave missing magnifi
 Next: Work through this example, then inspect two slides per hospital to compare their resolution metadata and thumbnails.
 
 ---
+
+## 2026-11-08 · Step 2: Compare slides from all five hospitals
+
+Question: Let's read the  slides from every hospital, and check if their pixel sizes or resolution levels differ?
+
+Expectation: The first slide opened at 0.25 micrometers per pixel and had ten resolution levels. I'll check the other slides before deciding how to choose a common resolution for tiles.
+
+**Selection and reasoning:** 
+
+- Use one negative slide and one annotated macrometastasis slide per hospital. This gives each hospital the same two label categories and provides tumor outlines for checking coordinates. 
+- Within each category, choose the smallest eligible file, with the filename breaking any tie, to keep the download manageable. 
+- The ten TIFFs total 16.76 GB, including the slide already downloaded. 
+- This small selection can reveal reading problems and missing metadata; it cannot establish typical hospital appearance or model performance.
+
+**Reproducibility**: Save the ten slide IDs, hospital codes, labels, source keys, sizes, and published checksums in `manifests/inspection_slides.csv`. Check those details against the saved metadata before downloading each slide.
+
+**What I did:**  
+
+- Extended the downloader to use this manifest and ran `02b_compare_hospitals.ipynb` on the Mac. 
+- All ten TIFFs and five XML files match their published MD5 checksums. 
+- All code cells ran successfully, and the agent checked them. 
+- The five XMLs contain 99 tumor polygons. All coordinates fall within their images. Small outlines still need closer views.
+
+**What I found:** 
+
+- The selected slides from hospitals 0, 1, and 3 record about 0.243094 micrometers per pixel and have nine resolution levels. 
+- Hospital 2 records 0.226316 in X and 0.226321 in Y, with eight levels. 
+- Hospital 4 records 0.25 in both directions and has ten levels. 
+- Every file provides physical pixel sizes, but none provides objective magnification or an embedded color profile.
+
+**Reading notes:** 
+
+- The examples from hospitals 0, 1, and 3 have large black areas around tissue; those from hospitals 2 and 4 have pale backgrounds. 
+- The tissue mask will need to exclude both. These are observations from two selected slides per hospital, not estimates of how common these appearances are.
+
+**Decision:** Start the tiling pilot at 0.5 micrometers per pixel, using each file's X and Y pixel sizes to resample. This target is close to level 1 in all ten files. At level 1 without resampling, a 256-pixel-wide crop would span about 115.9 micrometers in the hospital 2 examples and 128 micrometers in hospital 4.
+
+**Next:** Build a tissue mask and a small tile grid on this same set, then inspect both over the thumbnails.
