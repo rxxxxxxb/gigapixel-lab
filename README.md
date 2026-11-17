@@ -24,6 +24,8 @@ Next, [open one annotated slide](notebooks/02_look_at_slides.ipynb). This notebo
 
 Then [compare two slides per hospital](notebooks/02b_compare_hospitals.ipynb). The [fixed inspection sample](manifests/inspection_slides.csv) contains one negative slide and one annotated macro slide from each hospital, with source locations and checksums. The ten TIFFs need about 16.76 GB in total, including the first example. The notebook explains the selection, compares pixel sizes and resolution levels, and shows all five hospitals in one thumbnail grid.
 
+The next notebook uses those ten local slides to cut 256-pixel tiles at 0.5 µm per pixel. It shows which areas passed the tissue mask and where each example tile came from. [Tissue masks and tiles](notebooks/03a_masks_and_tiles.ipynb).
+
 ## Research question
 
 **How accurately and efficiently can we identify slides containing lymph-node metastases—and what happens when the slides come from different sites?**
