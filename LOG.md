@@ -99,3 +99,20 @@ Expectation: The first slide opened at 0.25 micrometers per pixel and had ten re
 **Decision:** Start the tiling pilot at 0.5 micrometers per pixel, using each file's X and Y pixel sizes to resample. This target is close to level 1 in all ten files. At level 1 without resampling, a 256-pixel-wide crop would span about 115.9 micrometers in the hospital 2 examples and 128 micrometers in hospital 4.
 
 **Next:** Build a tissue mask and a small tile grid on this same set, then inspect both over the thumbnails.
+
+---
+
+## 2026-11-17 · Step 3a. Tissue masks and tiles
+
+Can one tissue mask find the stained parts of all ten slides and give us tiles at the same physical scale? I expect color to help separate pink and purple tissue from both black and pale backgrounds. At the edges with faint tissues I expect the mask to miss some pixels.
+
+I’ll try 256 by 256 pixels at 0.5 µm per pixel. Each tile should cover about 128 µm on each side. I’ll use the image alone to choose the tiles, then check their positions against the five available tumor outlines.
+
+The ten slides yielded 27,721 tiles. I kept each complete square where at least half of the overview mask showed stain. Rounding the edges to original image pixels gave side lengths of 127.87 to 128.11 µm. Each slide has a local ZIP with its JPEGs, mask and coordinates. The notebook shows an overview, a close-up of the grid and a saved tile for each slide.
+
+The agent checked the previews for all five hospitals. The large black borders and pale glass mostly stayed clear. On the hospital 1 negative slide, some strands fell outside the retained grid. That is one place to revisit the half-tissue cutoff. 
+
+On the five annotated slides, 2,123 tile centers landed inside a published tumor outline. A square at the edge can cover both sides of the outline. For each annotated slide, the agent also checked the entire example tile against the original XML and confirmed that it sits inside the outline.
+
+Masking, tiling and writing the inspection images took about 83 seconds on this Mac. The JPEGs used 0.878 GB. Scaling by compressed TIFF bytes gives a rough 2 hours and 76.6 GB of JPEGs for the 500 labeled slides. The sample favors small files, and two TIFFs of similar size can contain different amounts of tissue. Downloads and feature extraction would take additional time.
+
